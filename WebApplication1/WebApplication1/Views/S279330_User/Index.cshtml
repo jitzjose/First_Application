@@ -1,0 +1,69 @@
+﻿@model IEnumerable<WebApplication1.S279330_User>
+@using Microsoft.AspNet.Identity
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        @*<th>
+            @Html.DisplayNameFor(model => model.UserId)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CarName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Details)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Address)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+       
+        <td>
+            @Html.DisplayFor(modelItem => item.UserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CarName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Details)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Address)
+        </td>
+        <td>
+            @if (User.Identity.GetUserName() == item.UserName || User.Identity.GetUserName() == "admin@aa.com")
+            {
+                if (User.Identity.GetUserName() == "admin@aa.com")
+                {
+                    @Html.ActionLink("Delete", "Delete", new { id = item.id })
+                }
+                else
+                {
+                    @Html.ActionLink("Edit ", "Edit", new { id = item.id })
+                    @Html.ActionLink("Details ", "Details", new { id = item.id })
+                    @Html.ActionLink("Delete", "Delete", new { id = item.id })
+                }
+            }
+            else
+            {
+                    @Html.ActionLink("Details", "Details", new { id = item.id }) 
+            }
+        </td>
+    </tr>
+}
+
+</table>
